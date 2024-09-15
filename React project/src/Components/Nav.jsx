@@ -5,21 +5,24 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import img from "../Images/logo.jpg"
 import { Routes, Route, useNavigate, Link } from "react-router-dom";
-
+import { useAuth0 } from '@auth0/auth0-react'
 
 const navigation = [
-    { name: 'Home', href: './' },
+  { name: 'Home', href: './' },
   { name: 'Pricing', href: './price' },
   { name: 'Find PGs', href: './pg' },
   { name: 'About', href: './about' },
   
 ]
 
+
 function Nav() {
     const navigate = useNavigate();
     function gotoPG() {
         navigate("/pg")
     }
+
+    const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
     function gotoPrice() {
         navigate("/price")
@@ -59,11 +62,19 @@ function Nav() {
               </a>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link to="/auth" className="text-sm font-semibold leading-6 text-gray-900">
-              Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
+          {isAuthenticated ? (
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <a onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} className="text-sm font-semibold leading-6 text-gray-900">
+              Log Out <span aria-hidden="true">&rarr;</span>
+            </a>
           </div>
+          ) : (
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <a onClick={() => loginWithRedirect()} className="text-sm font-semibold leading-6 text-gray-900">
+              Log in <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+          )}
         </nav>
         <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
           <div className="fixed inset-0 z-50" />
@@ -99,14 +110,25 @@ function Nav() {
                     </a>
                   ))}
                 </div>
-                <div className="py-6">
-                  <Link
-                    href="/auth"
+                {isAuthenticated ? (
+                  <div className="py-6">
+                  <a
+                    onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    Log Out
+                  </a>
+                </div>
+          ) : (
+            <div className="py-6">
+                  <a
+                    onClick={() => loginWithRedirect()}
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     Log in
-                  </Link>
+                  </a>
                 </div>
+          )}
               </div>
             </div>
           </DialogPanel>
