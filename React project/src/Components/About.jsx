@@ -39,7 +39,7 @@ const About = () => {
     {
       name: 'Pratham Jain',
       position: 'General Manager',
-      bio: 'John has over 15 years of experience in the hospitality industry.',
+      bio: 'Pratham is a Student at MSIT',
       image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80',
       linkedin: 'https://linkedin.com',
       twitter: 'https://twitter.com'
@@ -47,7 +47,7 @@ const About = () => {
     {
       name: 'Priyanshi Sharma',
       position: 'CEO',
-      bio: 'Jane is an award-winning chef with a passion for culinary excellence.',
+      bio: 'Priyanshi is a Student at MSIT',
       image: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80',
       linkedin: 'https://linkedin.com',
       twitter: 'https://twitter.com'
@@ -55,7 +55,7 @@ const About = () => {
     {
       name: 'Fawah',
       position: 'Customer Relations Manager',
-      bio: 'Mike ensures our guests have the best possible experience during their stay.',
+      bio: 'Fawah is a Student at MSIT',
       image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80',
       linkedin: 'https://linkedin.com',
       twitter: 'https://twitter.com'
@@ -63,7 +63,7 @@ const About = () => {
     {
       name: 'Simrat Oberoi',
       position: 'Events Coordinator',
-      bio: 'Sarah specializes in creating unforgettable events for our guests.',
+      bio: 'Simrat is a Student at MSIT',
       image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80',
       linkedin: 'https://linkedin.com',
       twitter: 'https://twitter.com'

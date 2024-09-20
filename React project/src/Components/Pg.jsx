@@ -23,50 +23,50 @@ const PGComponent = () => {
   const pgData = [
     {
       id: 1,
-      name: 'Sunrise Residency',
-      description: 'Cozy PG with modern amenities',
-      contactNumber: '+91 9876543210',
-      location: 'Mumbai',
+      name: 'Ekta Apartments',
+      description: 'Offers private rooms exclusively for girls, Semi-furnished, All the basic amenities nearby',
+      contactNumber: '267689089778',
+      location: 'Saket, South Delhi, Delhi',
       image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80'
     },
     {
       id: 2,
-      name: 'Green Valley PG',
-      description: 'Eco-friendly accommodation for students',
-      contactNumber: '+91 9876543211',
-      location: 'Bangalore',
+      name: 'Jay Studio Apartments',
+      description: 'Offers shared rooms for boys with a total capacity of 12 occupants, Fully Furnished,  Laundry service and housekeeping also available',
+      contactNumber: '726887201',
+      location: ' Block 3B, Dev Nagar, Central Delhi',
       image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
     },
     {
       id: 3,
-      name: 'City Center PG',
-      description: 'Prime location with excellent connectivity',
-      contactNumber: '+91 9876543212',
-      location: 'Delhi',
+      name: 'Millionaire Heritage',
+      description: 'Offers shared rooms for both girls and boys,  Rent includes food service, laundry, housekeeping, electricity, and Wi-Fi',
+      contactNumber: '1654537718',
+      location: 'Andheri West, Mumbai',
       image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
     },
     {
         id: 4,
-        name: 'City Center PG',
-        description: 'Prime location with excellent connectivity',
-        contactNumber: '+91 9876543212',
-        location: 'Delhi',
+        name: 'SAM Ladies PG',
+        description: 'Available for girls,  no set curfew time for residents',
+        contactNumber: '6276487198',
+        location: 'Indira Nagar, Bangalore East',
         image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
     },
     {
         id: 5,
-        name: 'City Center PG',
-        description: 'Prime location with excellent connectivity',
-        contactNumber: '+91 9876543212',
-        location: 'Delhi',
+        name: 'Shapphire Lake Side',
+        description: 'Offers private rooms for both girls and boys, All the basic amenities nearby',
+        contactNumber: '9876543212',
+        location: 'Powai, Mumbai',
         image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
     },
     {
         id: 6,
-        name: 'City Center PG',
-        description: 'Prime location with excellent connectivity',
-        contactNumber: '+91 9876543212',
-        location: 'Delhi',
+        name: 'Langford Town',
+        description: 'Offers shared rooms with 3 beds per room; Laundry, housekeeping, electricity, water, DTH, and Wi-Fi are included in the rent',
+        contactNumber: '7263587429',
+        location: 'Langford Town, Bangalore South',
         image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
     }
       
