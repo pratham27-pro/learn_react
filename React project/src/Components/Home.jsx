@@ -15,15 +15,20 @@ const navigation = [
   { name: 'Features', href: './Search.jsx' },
   { name: 'Find PGs', href: './pg' },
   { name: 'About', href: './About' },
+  { name: 'Profile', href: './profile' },
 ]
 
 export default function Home() {
     const navigate = useNavigate();
+    const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
     function gotoPG() {
         navigate("/pg")
     }
     function gotoPrice() {
         navigate("/price")
+    }
+    function makeProfile() {
+      navigate("/profile")
     }
 
 
@@ -106,13 +111,13 @@ export default function Home() {
               Where your PG is just another Home!
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Link
-                to={gotoPG}
+              <a
+                onClick={makeProfile}
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Get started
-              </Link>
-              <a href="/register" className="text-sm font-semibold leading-6 text-gray-900">
+                Make Profile
+              </a>
+              <a onClick={() => loginWithRedirect()} className="text-sm font-semibold leading-6 text-gray-900">
                 SignUp <span aria-hidden="true">→</span>
               </a>
             </div>

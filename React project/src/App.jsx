@@ -8,8 +8,9 @@ import PGComponent from './Components/Pg.jsx';
 import Candidates from './Components/Candidates.jsx';
 import Auth from './Components/Auth.jsx';
 import Footer from './Components/Footer.jsx';
+import Profile from './Components/Profile.jsx';
 import { Routes, Route, Link, createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import ChatApp from './Components/ChatUser.jsx';
 
 
 function App() {
@@ -37,6 +38,14 @@ function App() {
     {
       path: "/auth",
       element: <Auth/>
+    },
+    {
+      path: "/profile",
+      element: <Profile/>
+    },
+    {
+      path: "/chatting",
+      element: <ChatApp/>
     }
   ]);
   

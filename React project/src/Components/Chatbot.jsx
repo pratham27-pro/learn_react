@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaRobot, FaTimes } from 'react-icons/fa';
 import { BsThreeDots } from 'react-icons/bs';
+import { Routes, Route, useNavigate, Link } from "react-router-dom";
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,10 +10,12 @@ const Chatbot = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     // Simulate Botpress integration
     const botpressScript = document.createElement('script');
-    botpressScript.src = 'https://cdn.botpress.cloud/webchat/v2/shareable.html?botId=6652aa94-be87-4dc5-af4e-b9abc728f64a';
+    botpressScript.src = 'https://www.chatbase.co/chatbot-iframe/mAV9FWwJSjTaX3yPM6RXy';
     botpressScript.async = true;
     document.body.appendChild(botpressScript);
 
@@ -25,6 +28,10 @@ const Chatbot = () => {
     setIsOpen(!isOpen);
   };
 
+  const goto = () => {
+    window.location.href = "https://www.chatbase.co/chatbot-iframe/mAV9FWwJSjTaX3yPM6RXy";
+  }
+
   const handleSendMessage = () => {
     if (inputMessage.trim()) {
       setMessages([...messages, { text: inputMessage, sender: 'user' }]);
@@ -36,7 +43,7 @@ const Chatbot = () => {
         setIsTyping(false);
         setMessages(prevMessages => [
           ...prevMessages,
-          { text: 'Thank you for your message. How can I assist you further?', sender: 'bot' }
+          { text: 'Welcome to EazyPG. How can I assist you further?', sender: 'bot' }
         ]);
       }, 1500);
     }
@@ -46,7 +53,7 @@ const Chatbot = () => {
     <div className="fixed bottom-4 right-4 z-50">
       {!isOpen && (
         <button
-          onClick={handleIconClick}
+          onClick={goto}
           className="bg-blue-500 text-white rounded-full p-4 shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300 animate-bounce"
           aria-label="Open chat"
         >
