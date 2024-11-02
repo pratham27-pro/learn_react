@@ -6,7 +6,7 @@ import img from "../Images/logo.jpg"
 import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import Nav from './Nav.jsx'
 import Footer from './Footer.jsx'
-import Chatbot from './Chatbot.jsx'
+// import Chatbot from './Chatbot.jsx'
 
 import React, { useState } from 'react';
 import { FaLinkedin, FaTwitter } from 'react-icons/fa';
@@ -89,7 +89,7 @@ const About = () => {
         </div>
       </header> */}
       <Nav/>
-        <Chatbot/>
+        {/* <Chatbot/> */}
       <main className="container mx-auto px-4 py-12">
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-gray-800 mb-8">Welcome to EazyPG</h2>

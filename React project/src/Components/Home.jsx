@@ -7,7 +7,7 @@ import img from "../Images/logo.jpg"
 import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import Nav from './Nav.jsx'
 import Footer from './Footer.jsx'
-import Chatbot from './Chatbot.jsx'
+// import Chatbot from './Chatbot.jsx'
 import { useAuth0 } from '@auth0/auth0-react'
 
 const navigation = [
@@ -121,7 +121,7 @@ export default function Home() {
                 SignUp <span aria-hidden="true">→</span>
               </a>
             </div>
-            <Chatbot/>
+            {/* <Chatbot/> */}
           </div>
         </div>
         <div

@@ -7,7 +7,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import Nav from './Nav.jsx';
 import Footer from './Footer.jsx';
-import Chatbot from './Chatbot.jsx';
+// import Chatbot from './Chatbot.jsx';
 
 
 const PGComponent = () => {
@@ -89,7 +89,7 @@ const PGComponent = () => {
     
     <div>
     <Nav/>
-    <Chatbot/>
+    {/* <Chatbot/> */}
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">PG Finder</h1>

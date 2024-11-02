@@ -6,7 +6,7 @@ import Nav from './Nav.jsx';
 import Footer from './Footer.jsx'
 import { useAuth0 } from '@auth0/auth0-react'
 import Button from 'react-bootstrap/Button';
-import Chatbot from './Chatbot.jsx'
+// import Chatbot from './Chatbot.jsx'
 import PopUpNotification from './Pop.jsx';
 import ChatApp from './ChatUser.jsx';
 import { createPortal } from 'react-dom';
@@ -24,7 +24,8 @@ const Candidates = () => {
   const navigate = useNavigate();
 
   function chatting() {
-    window.location.href =  'http://localhost:3000';
+    // window.location.href =  'http://localhost:3000';
+    navigate("/chatting");
   }
 
   const profiles = [
@@ -95,7 +96,7 @@ document.body.appendChild(popup);
   return (
     <div>
       <Nav/>
-      <Chatbot/>
+      {/* <Chatbot/> */}
       {isAuthenticated ? (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
           <div className="w-full max-w-md">

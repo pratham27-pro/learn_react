@@ -6,7 +6,7 @@ import img from "../Images/logo.jpg"
 import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import Nav from './Nav.jsx'
 import Footer from './Footer.jsx'
-import Chatbot from './Chatbot.jsx'
+// import Chatbot from './Chatbot.jsx'
 import { useAuth0 } from '@auth0/auth0-react'
 import React, { useState } from 'react';
 import { FaUser, FaPhone, FaLanguage, FaUtensils, FaPen } from 'react-icons/fa';
@@ -88,9 +88,11 @@ const Profile = () => {
   };
 
   return (
+    <>
+    <Nav/>
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#ff80b5] to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
         <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
           <div className="max-w-md mx-auto">
             <div className="flex items-center space-x-5">
@@ -312,6 +314,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ import img from "../Images/logo.jpg"
 import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import Nav from './Nav.jsx'
 import { CheckIcon } from '@heroicons/react/20/solid'
-import Chatbot from './Chatbot.jsx'
+// import Chatbot from './Chatbot.jsx'
 
 const navigation = [
   { name: 'Home', href: './' },
@@ -29,7 +29,7 @@ export default function Price() {
   return (
     <div>
     <Nav/>
-    <Chatbot/>
+    {/* <Chatbot/> */}
     <div className="bg-white py-24 sm:py-32">
     
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
