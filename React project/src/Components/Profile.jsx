@@ -47,30 +47,56 @@ const Profile = () => {
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.gender) newErrors.gender = 'Gender is required';
-    if (!formData.age || formData.age < 18 || formData.age > 100) newErrors.age = 'Age must be between 18 and 100';
-    if (!/^[6-9]\d{9}$/.test(formData.contactNumber)) newErrors.contactNumber = 'Invalid Indian contact number';
+    if (!formData.age || formData.age < 12 || formData.age > 100) newErrors.age = 'Age must be between 12 and 100';
+    if (!/^[6-9]\d{9}$/.test(formData.contactNumber.toString().trim())) {
+      newErrors.contactNumber = 'Invalid Indian contact number';
+  }
+  
     if (!formData.motherTongue.trim()) newErrors.motherTongue = 'Mother tongue is required';
     if (!formData.foodPreference) newErrors.foodPreference = 'Food preference is required';
     if (!formData.wake) newErrors.wake = 'This field is required';
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = validateForm();
     if (Object.keys(newErrors).length === 0) {
-      setIsSubmitting(true);
-      // Simulating API call
-      setTimeout(() => {
-        console.log('Form submitted:', formData);
-        setIsSubmitting(false);
-        // Reset form after successful submission
-        handleReset();
-      }, 2000);
+        setIsSubmitting(true);
+
+        // Prepare the form data to send
+        const formDataToSend = new FormData(); // Change this variable name
+        formDataToSend.append('name', formData.name); // Correctly use the state variable
+        formDataToSend.append('gender', formData.gender);
+        formDataToSend.append('age', formData.age);
+        formDataToSend.append('contactNumber', formData.contactNumber);
+        formDataToSend.append('motherTongue', formData.motherTongue);
+        formDataToSend.append('foodPreference', formData.foodPreference);
+        formDataToSend.append('wake', formData.wake);
+        formDataToSend.append('description', formData.description);
+        if (profilePicture) {
+            const blob = await fetch(profilePicture).then(r => r.blob());
+            formDataToSend.append('profilePicture', blob, 'profile.jpg'); // You can set any name
+        }
+
+        // Send the form data to the backend
+        try {
+            const response = await fetch('http://localhost:8000/api/v1/users', {
+                method: 'POST',
+                body: formDataToSend,
+            });
+            const result = await response.json();
+            console.log('Form submitted:', result);
+            handleReset(); // Reset form after submission
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        } finally {
+            setIsSubmitting(false);
+        }
     } else {
-      setErrors(newErrors);
+        setErrors(newErrors);
     }
-  };
+};
 
   const handleReset = () => {
     setFormData({
@@ -241,7 +267,7 @@ const Profile = () => {
                         <input
                           type="radio"
                           name="wake"
-                          value="veg"
+                          value="night"
                           checked={formData.wake === 'night'}
                           onChange={handleInputChange}
                           className="form-radio text-green-500"
@@ -251,7 +277,7 @@ const Profile = () => {
                       <label className="inline-flex items-center">
                         <input
                           type="radio"
-                          name="foodPreference"
+                          name="wake"
                           value="early"
                           checked={formData.wake === 'early'}
                           onChange={handleInputChange}
@@ -259,17 +285,6 @@ const Profile = () => {
                         />
                         <span className="ml-2">Early Bird</span>
                       </label>
-                      {/* <label className="inline-flex items-center">
-                        <input
-                          type="radio"
-                          name="foodPreference"
-                          value="both"
-                          checked={formData.foodPreference === 'both'}
-                          onChange={handleInputChange}
-                          className="form-radio text-yellow-500"
-                        />
-                        <span className="ml-2">Both</span>
-                      </label> */}
                     </div>
                   </fieldset>
                   {errors.wake && <p className="text-red-500 text-xs italic">{errors.wake}</p>}
