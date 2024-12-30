@@ -81,7 +81,7 @@ const Profile = () => {
 
         // Send the form data to the backend
         try {
-            const response = await fetch('http://localhost:8000/api/v1/users', {
+            const response = await fetch("https://eazypg.onrender.com/", 'http://localhost:8000/api/v1/users', {
                 method: 'POST',
                 body: formDataToSend,
             });
