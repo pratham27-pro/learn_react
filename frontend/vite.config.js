@@ -8,4 +8,10 @@ export default defineConfig({
     outDir: 'dist', // Ensure this matches your Render settings
   },
   plugins: [react()],
+  server: {
+    sourcemap: true, // Ensure source maps are enabled
+  },
+  build: {
+    sourcemap: true, // Enable source maps for production if needed
+  }
 })
