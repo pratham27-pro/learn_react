@@ -21,4 +21,15 @@ app.use(cookieParser());
 app.use("/api/v1/users", userRouter); // Use the user routes
 app.use("/api/auth", authRouter);
 
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || "Internal Server error";
+    return res.status(statusCode)
+               .json({
+                    success: false,
+                    message,
+                    statusCode,
+               })
+})
+
 export { app };
