@@ -4,7 +4,6 @@ import img from "../Images/logo.jpg";
 import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import Nav from './Nav.jsx';
 import Footer from './Footer.jsx'
-import { useAuth0 } from '@auth0/auth0-react'
 import Button from 'react-bootstrap/Button';
 // import Chatbot from './Chatbot.jsx'
 import PopUpNotification from './Pop.jsx';
@@ -20,7 +19,6 @@ const Candidates = () => {
   const [currentProfile, setCurrentProfile] = useState(1);
   const [direction, setDirection] = useState(null);
   let [swipeCount, setSwipeCount] = useState(0); // Add a new state to count the right swipes
-  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
   const navigate = useNavigate();
 
   function chatting() {
@@ -97,7 +95,6 @@ document.body.appendChild(popup);
     <div>
       <Nav/>
       {/* <Chatbot/> */}
-      {isAuthenticated ? (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
           <div className="w-full max-w-md">
             <AnimatePresence>
@@ -151,7 +148,7 @@ document.body.appendChild(popup);
             </div>
           </div>
         </div>
-      ) : (<Button onClick={() => loginWithRedirect()} variant="primary">Login To Access</Button>)}
+      {/* <Button onClick={() => loginWithRedirect()} variant="primary">Login To Access</Button> */}
       
     </div>
   );

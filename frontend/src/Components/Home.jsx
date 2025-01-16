@@ -20,7 +20,7 @@ const navigation = [
 
 export default function Home() {
     const navigate = useNavigate();
-    const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+    // const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
     function gotoPG() {
         navigate("/pg")
     }
@@ -29,6 +29,9 @@ export default function Home() {
     }
     function makeProfile() {
       navigate("/profile")
+    }
+    function doauth() {
+      navigate("/auth");
     }
 
 
@@ -74,7 +77,7 @@ export default function Home() {
                 </div>
                 <div className="py-6">
                   <a
-                    href="#"
+                    onClick={doauth}
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     Log in
@@ -117,7 +120,7 @@ export default function Home() {
               >
                 Make Profile
               </a>
-              <a onClick={() => loginWithRedirect()} className="text-sm font-semibold leading-6 text-gray-900">
+              <a onClick={doauth} className="text-sm font-semibold leading-6 text-gray-900">
                 SignUp <span aria-hidden="true">→</span>
               </a>
             </div>

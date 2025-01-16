@@ -5,13 +5,11 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/', // Adjust this if your app is hosted in a subdirectory
   build: {
-    outDir: 'dist', // Ensure this matches your Render settings
+    outDir: 'dist', 
+    sourcemap: true,
   },
   plugins: [react()],
   server: {
-    sourcemap: true, // Ensure source maps are enabled
-  },
-  build: {
-    sourcemap: true, // Enable source maps for production if needed
+    sourcemap: true, // Ensure source maps are enabled for the deployment
   }
 })
