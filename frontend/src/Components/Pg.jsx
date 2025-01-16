@@ -32,7 +32,7 @@ const PGComponent = () => {
     {
       id: 2,
       name: 'Jay Studio Apartments',
-      description: 'Offers shared rooms for boys with a total capacity of 12 occupants, Fully Furnished,  Laundry service and housekeeping also available',
+      description: 'Offers shared rooms for boys with a total capacity of 12 occupants, Laundry service and housekeeping also available',
       contactNumber: '726887201',
       location: ' Block 3B, Dev Nagar, Central Delhi',
       image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
@@ -64,7 +64,7 @@ const PGComponent = () => {
     {
         id: 6,
         name: 'Langford Town',
-        description: 'Offers shared rooms with 3 beds per room; Laundry, housekeeping, electricity, water, DTH, and Wi-Fi are included in the rent',
+        description: 'Offers shared rooms with 3 beds per room; DTH, and Wi-Fi are included in the rent',
         contactNumber: '7263587429',
         location: 'Langford Town, Bangalore South',
         image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'

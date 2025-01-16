@@ -1,16 +1,36 @@
 'use client'
-
+import React from 'react';
 import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import img from "../Images/logo.jpg"
 import { Routes, Route, useNavigate, Link } from "react-router-dom";
-import Nav from './Nav.jsx'
 
-import React from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
 const Footer = () => {
+
+  const navigate = useNavigate();
+
+  function home() {
+    navigate("/");
+  };
+
+  function price() {
+    navigate("/price");
+  };
+
+  function about() {
+    navigate("/about");
+  };
+
+  function pg() {
+    navigate("/pg");
+  };
+
+  
+  
+
   return (
     <footer className="bg-white-800 text-gray py-10">
       <div className="container mx-auto px-4">
@@ -31,10 +51,10 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Useful Links</h3>
             <ul>
-              <li><a href="#" className="text-gray-400 hover:text-black">Home</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-black">About</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-black">Services</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-black">Contact</a></li>
+              <li><a onClick={home} className="text-gray-400 hover:text-black">Home</a></li>
+              <li><a onClick={about} className="text-gray-400 hover:text-black">About</a></li>
+              <li><a onClick={pg} className="text-gray-400 hover:text-black">Find PGs</a></li>
+              <li><a onClick={price} className="text-gray-400 hover:text-black">Price</a></li>
             </ul>
           </div>
 

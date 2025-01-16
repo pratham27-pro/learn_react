@@ -53,14 +53,6 @@ const About = () => {
       twitter: 'https://twitter.com'
     },
     {
-      name: 'Fawah',
-      position: 'Customer Relations Manager',
-      bio: 'Fawah is a Student at MSIT',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80',
-      linkedin: 'https://linkedin.com',
-      twitter: 'https://twitter.com'
-    },
-    {
       name: 'Simrat Oberoi',
       position: 'Events Coordinator',
       bio: 'Simrat is a Student at MSIT',
@@ -72,24 +64,7 @@ const About = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      {/* <header className="bg-white shadow-md">
-        <div className="container mx-auto px-4 py-6 flex justify-between items-center">
-          <div className="flex items-center">
-            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&h=80&q=80" alt="Hotel Logo" className="h-12 w-12 mr-4" />
-            <h1 className="text-2xl font-semibold text-gray-800">Luxury Hotel</h1>
-          </div>
-          <nav>
-            <ul className="flex space-x-6">
-              <li><a href="#" className="text-gray-600 hover:text-gray-800">Home</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-gray-800">Rooms</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-gray-800">Amenities</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-gray-800">Contact</a></li>
-            </ul>
-          </nav>
-        </div>
-      </header> */}
       <Nav/>
-        {/* <Chatbot/> */}
       <main className="container mx-auto px-4 py-12">
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-gray-800 mb-8">Welcome to EazyPG</h2>
@@ -101,7 +76,7 @@ const About = () => {
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-gray-800 mb-8">Meet Our Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="flex flex-cols-1 md:flex-cols-2 lg:flex-cols-4 gap-8 justify-center items-center">
             {teamMembers.map((member, index) => (
               <motion.div
                 key={index}
