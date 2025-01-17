@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { FaGoogle, FaGithub, FaEye, FaEyeSlash } from 'react-icons/fa';
 import img from "../Images/logo.jpg"
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signinFailure, signinStart, signinSuccess } from '../redux/user/userSlice';
 
 function Login() {
     const [formData, setFormData] = useState({});
@@ -12,10 +14,10 @@ function Login() {
     };
   
     const [showPassword, setShowPassword] = useState(false);
-    const [errors, setErrors] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const {loading, error} = useSelector((state) => state.user)
   
     const navigate = useNavigate();
+    const dispatch = useDispatch();
   
     function login() {
         navigate("/login");
@@ -33,8 +35,7 @@ function Login() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        setLoading(true);
-        setErrors(false);
+        dispatch(signinStart());
         const res = await fetch("/api/auth/signin", {
           method: "POST",
           headers: {
@@ -43,13 +44,13 @@ function Login() {
           body: JSON.stringify(formData),
         });
   
-        setLoading(false);
         
         if (data.success == false) {
-          setErrors(true);
+          dispatch(signinFailure(data.message));
           return;
         }
-
+        
+        dispatch(signinSuccess());
         navigate("/");
     
         if (!res.ok) {
@@ -64,8 +65,7 @@ function Login() {
         alert("Signup successful!");
     
       } catch (error) {
-        setLoading(true);
-        setErrors(true);
+        dispatch(signinFailure(error));
         console.error("An error occurred during signup:", error);
         alert("An error occurred during signup. Please try again.");
       }
