@@ -13,7 +13,9 @@ const Signup = () => {
   };
 
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   function login() {
@@ -32,6 +34,8 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
+      setErrors(false);
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
@@ -39,6 +43,13 @@ const Signup = () => {
         },
         body: JSON.stringify(formData),
       });
+
+      setLoading(false);
+      
+      if (data.success == false) {
+        setErrors(true);
+        return;
+      }
   
       if (!res.ok) {
         const errorData = await res.json();
@@ -52,6 +63,8 @@ const Signup = () => {
       alert("Signup successful!");
   
     } catch (error) {
+      setLoading(true);
+      setErrors(true);
       console.error("An error occurred during signup:", error);
       alert("An error occurred during signup. Please try again.");
     }
@@ -156,10 +169,11 @@ const Signup = () => {
         </div>
         <div>
           <button
+            disabled={loading}
             type="submit"
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Sign up
+            {loading ? "Loading..." : "Sign Up"}
           </button>
         </div>
       </form>
