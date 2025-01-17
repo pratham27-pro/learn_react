@@ -30,8 +30,11 @@ export default function Home() {
     function makeProfile() {
       navigate("/profile")
     }
-    function doauth() {
-      navigate("/auth");
+    function signup() {
+      navigate("/signup");
+    }
+    function login() {
+      navigate("/login");
     }
 
 
@@ -77,7 +80,7 @@ export default function Home() {
                 </div>
                 <div className="py-6">
                   <a
-                    onClick={doauth}
+                    onClick={login}
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     Log in
@@ -120,7 +123,7 @@ export default function Home() {
               >
                 Make Profile
               </a>
-              <a onClick={doauth} className="text-sm font-semibold leading-6 text-gray-900">
+              <a onClick={signup} className="text-sm font-semibold leading-6 text-gray-900">
                 SignUp <span aria-hidden="true">→</span>
               </a>
             </div>

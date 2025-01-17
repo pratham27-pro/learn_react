@@ -11,5 +11,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
     sourcemap: true, // Ensure source maps are enabled for the deployment
+    proxy: {
+      "/api": 
+      {
+        target: "http://localhost:8000",
+        secure: false
+      }
+    }
   }
 })

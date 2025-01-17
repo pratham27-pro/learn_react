@@ -17,9 +17,12 @@ function Nav() {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  function doauth() {
-    navigate("/auth");
-  };
+  function signup() {
+    navigate("/signup");
+  }
+  function login() {
+    navigate("/login");
+  }
 
   return (
     <div className="bg-white">
@@ -50,7 +53,7 @@ function Nav() {
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center">
             
-              <a onClick={doauth} className="inline-block bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 text-lg"> {/* Increased font size to text-lg */}
+              <a onClick={login} className="inline-block bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 text-lg"> {/* Increased font size to text-lg */}
                 Log in <span aria-hidden="true">&rarr;</span>
               </a>
             
@@ -89,7 +92,7 @@ function Nav() {
                 
                   <div className="py-6">
                     <a
-                      onClick={doauth}
+                      onClick={login}
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       Log in
