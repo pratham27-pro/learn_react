@@ -50,6 +50,8 @@ const Signup = () => {
         setErrors(true);
         return;
       }
+
+      navigate("/");
   
       if (!res.ok) {
         const errorData = await res.json();
