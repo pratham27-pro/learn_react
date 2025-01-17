@@ -4,12 +4,12 @@ import multer from 'multer';
 import { User } from '../models/user.model.js';
 
 const router = express.Router();
-const upload = multer(); // You can configure storage options if needed
+const upload = multer(); 
 
 // POST route to create a new user profile
 router.post('/', upload.single('profilePicture'), async (req, res) => {
-    console.log("Received body:", req.body); // Log the body to see what is received
-    console.log("Received file:", req.file); // Log the file to see if it's received
+    console.log("Received body:", req.body); // To see what is received
+    console.log("Received file:", req.file); // To see if it's received
 
     const { name, gender, age, contactNumber, motherTongue, foodPreference, wake, description } = req.body;
 
