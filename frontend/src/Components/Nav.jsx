@@ -1,33 +1,37 @@
-'use client'
-
-import { useState } from 'react';
-import { Dialog, DialogPanel } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useState } from "react";
+import { Dialog, DialogPanel } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import img from "../Images/logo.jpg";
 import { useNavigate, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/user/userSlice";
 
 const navigation = [
-  { name: 'Home', href: './' },
-  { name: 'Pricing', href: './price' },
-  { name: 'Find PGs', href: './pg' },
-  { name: 'About', href: './about' },
+  { name: "Home", href: "./" },
+  { name: "Pricing", href: "./price" },
+  { name: "Find PGs", href: "./pg" },
+  { name: "About", href: "./about" },
 ];
 
 function Nav() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  function signup() {
-    navigate("/signup");
-  }
-  function login() {
-    navigate("/login");
-  }
+  const { currentUser } = useSelector((state) => state.user);
+
+  const handleLogout = () => {
+    dispatch(logout()); // Dispatch the logout action
+    alert("You have been logged out.");
+  };
 
   return (
     <div className="bg-white">
       <header className="absolute inset-x-0 top-0 z-50">
-        <nav aria-label="Global" className="flex items-center justify-between p-4 lg:px-8">
+        <nav
+          aria-label="Global"
+          className="flex items-center justify-between p-4 lg:px-8"
+        >
           <div className="flex lg:flex-1 items-center">
             <Link to="/" className="-m-1.5 p-1.5 flex items-center">
               <span className="sr-only">EazyPG</span>
@@ -46,17 +50,31 @@ function Nav() {
           </div>
           <div className="hidden lg:flex lg:gap-x-12 items-center">
             {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="text-lg font-semibold leading-6 text-gray-900"> {/* Increased font size to text-lg */}
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-lg font-semibold leading-6 text-gray-900"
+              >
                 {item.name}
               </a>
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center">
-            
-              <a onClick={login} className="inline-block bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 text-lg"> {/* Increased font size to text-lg */}
+            {currentUser ? (
+              <button
+                onClick={handleLogout}
+                className="inline-block bg-red-600 text-white font-semibold py-2 px-4 rounded hover:bg-red-700 transition duration-300 text-lg"
+              >
+                Log out
+              </button>
+            ) : (
+              <a
+                onClick={() => navigate("/login")}
+                className="inline-block bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition duration-300 text-lg"
+              >
                 Log in <span aria-hidden="true">&rarr;</span>
               </a>
-            
+            )}
           </div>
         </nav>
         <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -89,35 +107,28 @@ function Nav() {
                     </a>
                   ))}
                 </div>
-                
-                  <div className="py-6">
+                <div className="py-6">
+                  {currentUser ? (
+                    <button
+                      onClick={handleLogout}
+                      className="block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      Log out
+                    </button>
+                  ) : (
                     <a
-                      onClick={login}
+                      onClick={() => navigate("/login")}
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       Log in
                     </a>
-                  </div>
+                  )}
+                </div>
               </div>
             </div>
           </DialogPanel>
         </Dialog>
       </header>
-
-      <div className="relative isolate px-6 pt-20 lg:px-8">
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-        >
-          <div
-            style={{
-              clipPath:
-                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-            }}
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-          />
-        </div>
-      </div>
     </div>
   );
 }

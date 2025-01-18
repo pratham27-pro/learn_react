@@ -11,7 +11,7 @@ import { Routes, Route, Link, createBrowserRouter, RouterProvider } from "react-
 import ChatApp from './Components/ChatUser.jsx';
 import Signup from './Components/Signup.jsx';
 import Login from './Components/Login.jsx';
-
+import PrivateRoute from './Components/PrivateRoute.jsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -45,7 +45,13 @@ function App() {
     },
     {
       path: "/profile",
-      element: <Profile/>
+      element: <PrivateRoute />, 
+      children: [
+        {
+          path: "/profile", 
+          element: <Profile /> 
+        }
+      ]
     },
     {
       path: "/chatting",

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signinFailure, signinStart, signinSuccess } from '../redux/user/userSlice.js';
 import OAuth from './OAuth.jsx';
+import Nav from './Nav.jsx';
 
 function Login() {
     const [formData, setFormData] = useState({});
@@ -65,13 +66,25 @@ function Login() {
         });
     
         if (!res.ok) {
-          // Handle non-2xx HTTP responses
-          const errorData = await res.json();
-          console.error("Login failed:", errorData);
-          dispatch(signinFailure(errorData.message || "Login failed"));
-          alert(`Login failed: ${errorData.message || "Unknown error"}`);
+          try {
+            // Attempt to parse the error response as JSON
+            const errorData = await res.json();
+            console.error("Login failed:", errorData);
+        
+            // Dispatch failure with the error message
+            dispatch(signinFailure(errorData.message || "Login failed"));
+            
+            // Alert the user
+            alert(`Login failed: ${errorData.message || "Unknown error"}`);
+          } catch (jsonError) {
+            // If parsing JSON fails, fallback to a generic error
+            console.error("Login failed, unable to parse error response:", jsonError);
+            dispatch(signinFailure("Login failed, invalid response from server"));
+            alert("Login failed: Server returned an invalid response.");
+          }
           return;
         }
+        
     
         // Parse response JSON
         const data = await res.json();
@@ -96,10 +109,7 @@ function Login() {
     };
   
     return (
-      
-  
-  
-      <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-white rounded-xl shadow-lg p-6 sm:p-10">
           
           <div>

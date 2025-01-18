@@ -1,18 +1,14 @@
 'use client'
 
-import { Dialog, DialogPanel } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import img from "../Images/logo.jpg"
-import { Routes, Route, useNavigate, Link } from "react-router-dom";
 import Nav from './Nav.jsx'
-import Footer from './Footer.jsx'
-// import Chatbot from './Chatbot.jsx'
-import { useAuth0 } from '@auth0/auth0-react'
-import React, { useState } from 'react';
-import { FaUser, FaPhone, FaLanguage, FaUtensils, FaPen } from 'react-icons/fa';
-import { MdCake } from 'react-icons/md';
+import React, { useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
+  const {currentUser} = useSelector((state) => state.user);
+  const fileRef = useRef(null);
+  const [image, setImage] = useState(undefined);
+
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
@@ -114,8 +110,7 @@ const Profile = () => {
   };
 
   return (
-    <>
-    <Nav/>
+   
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
         <div className="absolute inset-0 bg-gradient-to-r from-[#ff80b5] to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
@@ -128,22 +123,24 @@ const Profile = () => {
                 <p className="text-sm text-gray-500 font-normal leading-relaxed">Enter your details for roommate matching</p>
               </div>
             </div>
-            <form className="divide-y divide-gray-200" onSubmit={handleSubmit}>
+            <form className="divide-y divide-gray-200" onSubmit={handleSubmit} id='form' name='form'>
               <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                 <div className="flex justify-center">
                   <div className="relative w-32 h-32 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                     {profilePicture ? (
-                      <img src={profilePicture} alt="Profile" className="absolute w-32 h-32 text-gray-400 -left-1" />
+                      <img src={currentUser.profilePicture} alt="Profile" className="absolute w-32 h-32 text-gray-400 -left-1" />
                     ) : (
                       <svg className="absolute w-34 h-34 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
                     )}
                   </div>
                 </div>
                 <div className="flex justify-center mt-4">
-                  <label htmlFor="profile-picture" className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">
+                  <label htmlFor="profile-picture" className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300" 
+                  >
                     Upload Picture
                     <input
                       type="file"
+                      ref={fileRef}
                       id="profile-picture"
                       accept="image/*"
                       className="hidden"
@@ -329,7 +326,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
-    </>
+    
   );
 };
 
