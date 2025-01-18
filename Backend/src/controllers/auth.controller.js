@@ -29,7 +29,7 @@ export const signin = async (req, res, next) => {
         if (!validPassword) return next(errorHandler(401, "Invalid credentials"));
 
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-        const { password: hashedPassword, ...rest} = validUser._doc();
+        const { password: hashedPassword, ...rest} = validUser._doc;
 
         const expiry = new Date(Date.now() + 3600000); // 1hr
         res.cookie("access-token", token, {httpOnly: true, expires: expiry}).status(200).json(validUser);
