@@ -4,7 +4,7 @@ import { FaGoogle, FaGithub, FaEye, FaEyeSlash } from 'react-icons/fa';
 import img from "../Images/logo.jpg"
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signinFailure, signinStart, signinSuccess } from '../redux/user/userSlice';
+import { signinFailure, signinStart, signinSuccess } from '../redux/user/userSlice.js';
 
 function Login() {
     const [formData, setFormData] = useState({});
@@ -19,8 +19,8 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
   
-    function login() {
-        navigate("/login");
+    function signup() {
+        navigate("/signup");
     }
   
     const validateEmail = (email) => {
@@ -34,49 +34,11 @@ function Login() {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      try {
-        dispatch(signinStart());
-        const res = await fetch("/api/auth/signin", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
-  
-        
-        if (data.success == false) {
-          dispatch(signinFailure(data.message));
-          return;
-        }
-        
-        dispatch(signinSuccess());
-        navigate("/");
     
-        if (!res.ok) {
-          const errorData = await res.json();
-          console.error("Signup failed:", errorData);
-          alert(`Signup failed: ${errorData.message || "Unknown error"}`);
-          return;
-        }
-  
-        const data = await res.json();
-        console.log("Signup successful:", data);
-        alert("Signup successful!");
+      // Extract form values from formData
+      const { email, password } = formData;
     
-      } catch (error) {
-        dispatch(signinFailure(error));
-        console.error("An error occurred during signup:", error);
-        alert("An error occurred during signup. Please try again.");
-      }
-  
-      
-  
-  
-      const data = await res.json();
-      console.log(data, {message: "User signup successfull in the backend too!!"});
-      
-  
+      // Validate inputs
       const newErrors = {};
       if (!validateEmail(email)) {
         newErrors.email = 'Invalid email address';
@@ -84,15 +46,47 @@ function Login() {
       if (!validatePassword(password)) {
         newErrors.password = 'Password must be at least 8 characters long';
       }
-      if (!username) {
-        newErrors.username = 'Username is required';
+
+      if (Object.keys(newErrors).length > 0) {
+        // If validation fails, handle errors
+        console.error("Validation failed:", newErrors);
+        return;
       }
-      setErrors(newErrors);
-      if (Object.keys(newErrors).length === 0) {
-        // Handle form submission
-        console.log('Form submitted');
+    
+      try {
+        dispatch(signinStart()); // Start the loading state
+        const res = await fetch("/api/auth/signin", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+    
+        if (!res.ok) {
+          // Handle non-2xx HTTP responses
+          const errorData = await res.json();
+          console.error("Login failed:", errorData);
+          dispatch(signinFailure(errorData.message || "Login failed"));
+          alert(`Login failed: ${errorData.message || "Unknown error"}`);
+          return;
+        }
+    
+        // Parse response JSON
+        const data = await res.json();
+        console.log("Login successful:", data);
+        dispatch(signinSuccess());
+        alert("Login successful!");
+        navigate("/");
+    
+      } catch (error) {
+        // Handle fetch or other runtime errors
+        console.error("An error occurred during login:", error);
+        dispatch(signinFailure(error.message || "An error occurred"));
+        alert("An error occurred during login. Please try again.");
       }
     };
+    
   
     const getPasswordStrength = (password) => {
       if (password.length < 8) return 'Weak';
@@ -109,7 +103,7 @@ function Login() {
           
           <div>
             <h2 className="mt-6 text-center text-2xl sm:text-3xl font-extrabold text-gray-900">
-              Create your account
+                Sign in to your account
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{' '}
@@ -117,7 +111,7 @@ function Login() {
                 onClick={signup}
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
-                Sign in to your account
+                Create your account
               </button>
             </p>
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -129,9 +123,9 @@ function Login() {
                     type="email"
                     autoComplete="email"
                     required
-                    className={`appearance-none rounded-none relative block w-full px-3 py-2 border ${
-                      errors.email ? 'border-red-300' : 'border-gray-300'
-                    } placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
+                    className={`appearance-none rounded-none relative block w-full px-3 py-2 border
+                      border-gray-300
+                    placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
                     placeholder="Email address"
                     onChange={handleChange}
                   />
@@ -143,9 +137,9 @@ function Login() {
                     type={showPassword ? 'text' : 'password'}
                     autoComplete="current-password"
                     required
-                    className={`appearance-none rounded-none relative block w-full px-3 py-2 border ${
-                      errors.password ? 'border-red-300' : 'border-gray-300'
-                    } placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
+                    className={`appearance-none rounded-none relative block w-full px-3 py-2 border
+                      border-gray-300
+                       placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
                     placeholder="Password"
                     onChange={handleChange}
                   />
