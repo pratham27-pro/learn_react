@@ -21,7 +21,8 @@ const PGComponent = () => {
       description:
         'A modern PG offering fully furnished rooms with essential amenities. Located near public transport and major landmarks.',
       price: { monthlyRent: 8000, securityDeposit: 10000 },
-      image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267',
+
+      image: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       id: 2,
@@ -31,8 +32,7 @@ const PGComponent = () => {
       reviews: 30,
       description:
         'Greenfield Residency offers spacious rooms, free WiFi, and convenient access to shopping areas and parks.',
-      price: { monthlyRent: 7500, securityDeposit: 8000 },
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e',
+      price: { monthlyRent: 7500, securityDeposit: 8000 }, image: 'https://plus.unsplash.com/premium_photo-1683120852623-143817d6400b?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       id: 3,
@@ -42,8 +42,7 @@ const PGComponent = () => {
       reviews: 50,
       description:
         'Premium PG with a modern vibe, offering a gym, free WiFi, and proximity to educational institutions and transit hubs.',
-      price: { monthlyRent: 9000, securityDeposit: 12000 },
-      image: 'https://images.unsplash.com/photo-1560185127-6c3f39b7b9ee',
+      price: { monthlyRent: 9000, securityDeposit: 12000 }, image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       id: 4,
@@ -53,8 +52,7 @@ const PGComponent = () => {
       reviews: 38,
       description:
         'Experience a peaceful and homely environment at Serene Stay PG. Fully furnished rooms with round-the-clock security and easy access to IT hubs.',
-      price: { monthlyRent: 8500, securityDeposit: 10000 },
-      image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750',
+      price: { monthlyRent: 8500, securityDeposit: 10000 }, image: 'https://images.unsplash.com/photo-1586105251261-72a756497a11?q=80&w=3058&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       id: 5,
@@ -64,8 +62,7 @@ const PGComponent = () => {
       reviews: 65,
       description:
         'Blue Horizon PG is the ideal choice for a coastal living experience. Enjoy ocean views, premium amenities, and a relaxing ambiance close to the beach.',
-      price: { monthlyRent: 9500, securityDeposit: 12000 },
-      image: 'https://images.unsplash.com/photo-1550525811-e5869dd03032',
+      price: { monthlyRent: 9500, securityDeposit: 12000 }, image: 'https://images.unsplash.com/photo-1519974719765-e6559eac2575?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       id: 6,
@@ -75,8 +72,7 @@ const PGComponent = () => {
       reviews: 29,
       description:
         'Metro Living PG offers affordable comfort in the bustling heart of Delhi. Ideal for students and professionals looking for convenience and connectivity.',
-      price: { monthlyRent: 7000, securityDeposit: 9000 },
-      image: 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0',
+      price: { monthlyRent: 7000, securityDeposit: 9000 }, image: 'https://images.unsplash.com/photo-1568495248636-6432b97bd949?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
   ];
 
