@@ -63,6 +63,10 @@ const About = () => {
   ];
 
   return (
+    <div className="bg-white pt-12">
+      <header className="absolute inset-x-0 top-0 z-50">
+        <Nav/>
+      </header>
     <div className="bg-gray-100 min-h-screen">
       <Nav/>
       <main className="container mx-auto px-4 py-12">
@@ -164,7 +168,7 @@ const About = () => {
           </div>
         </section>
       </main>
-
+      </div>
       <Footer/>
     </div>
   );

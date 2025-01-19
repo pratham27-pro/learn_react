@@ -94,8 +94,10 @@ const PGComponent = () => {
   };
 
   return (
-    <div>
-      <Nav />
+    <div className="bg-white pt-12">
+      <header className="absolute inset-x-0 top-0 z-50">
+        <Nav/>
+      </header>
       <div className="min-h-screen bg-gray-100 p-8">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">PG Finder</h1>

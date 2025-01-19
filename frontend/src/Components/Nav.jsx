@@ -7,10 +7,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/user/userSlice";
 
 const navigation = [
-  { name: "Home", href: "./" },
-  { name: "Pricing", href: "./price" },
-  { name: "Find PGs", href: "./pg" },
-  { name: "About", href: "./about" },
+  { name: "Home", href: "/" },
+  { name: "Pricing", href: "/price" },
+  { name: "Find PGs", href: "/pg" },
+  { name: "About", href: "/about" },
 ];
 
 function Nav() {
@@ -50,13 +50,13 @@ function Nav() {
           </div>
           <div className="hidden lg:flex lg:gap-x-12 items-center">
             {navigation.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}  // Changed href to to for absolute paths
                 className="text-lg font-semibold leading-6 text-gray-900"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center">
@@ -98,13 +98,13 @@ function Nav() {
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
                   {navigation.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
-                      href={item.href}
+                      to={item.href}  // Changed href to to for absolute paths
                       className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
                 <div className="py-6">
