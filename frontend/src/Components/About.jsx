@@ -40,13 +40,7 @@ const About = () => {
         },
         body: JSON.stringify(formData),
       });
-
-      setLoading(false);
       
-      if (data.success == false) {
-        setErrors(true);
-        return;
-      }
       alert("Contact form successfully sent!")
       navigate("/");
   
@@ -63,8 +57,6 @@ const About = () => {
 
   
     }catch (error) {
-      setLoading(true);
-      setErrors(true);
       console.error("An error occurred during Contact form:", error);
       alert("An error occurred during Contact form. Please try again.");
     }}
