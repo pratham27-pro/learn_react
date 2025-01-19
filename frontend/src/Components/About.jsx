@@ -26,8 +26,7 @@ const About = () => {
   //   setFormData(prevState => ({
   //     ...prevState,
   //     [name]: value
-  //   }));heyhey
-  // };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,7 +43,10 @@ const About = () => {
 
       setLoading(false);
       
-      
+      if (data.success == false) {
+        setErrors(true);
+        return;
+      }
       alert("Contact form successfully sent!")
       navigate("/");
   
@@ -60,7 +62,9 @@ const About = () => {
       alert("Contact form successful!");
 
   
-    } catch (error) {
+    }catch (error) {
+      setLoading(true);
+      setErrors(true);
       console.error("An error occurred during Contact form:", error);
       alert("An error occurred during Contact form. Please try again.");
     }}
