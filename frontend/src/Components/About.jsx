@@ -13,27 +13,61 @@ import { FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const About = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+  const [formData, setFormData] = useState({});
+  const handleChange = (e) => {
+    setFormData({...formData, [e.target.id]: e.target.value});
   };
 
-  const handleSubmit = (e) => {
+  const [errors, setErrors] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData(prevState => ({
+  //     ...prevState,
+  //     [name]: value
+  //   }));
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted:', formData);
-    // Reset form after submission
-    setFormData({ name: '', email: '', message: '' });
-  };
+    try {
+      setLoading(true);
+      setErrors(false);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      setLoading(false);
+      
+      if (data.success == false) {
+        setErrors(true);
+        return;
+      }
+      alert("Contact form successfully sent!")
+      navigate("/");
+  
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error("Contact form failed:", errorData);
+        alert(`Contact form failed: ${errorData.message || "Unknown error"}`);
+        return;
+      }
+
+      const data = await res.json();
+      console.log("Contact form successful:", data);
+      alert("Contact form successful!");
+  
+    } catch (error) {
+      setLoading(true);
+      setErrors(true);
+      console.error("An error occurred during Contact form:", error);
+      alert("An error occurred during Contact form. Please try again.");
+    }}
 
   const teamMembers = [
     {
@@ -128,7 +162,7 @@ const About = () => {
                     id="name"
                     name="name"
                     value={formData.name}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                   />
@@ -140,7 +174,7 @@ const About = () => {
                     id="email"
                     name="email"
                     value={formData.email}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                   />
@@ -148,10 +182,10 @@ const About = () => {
                 <div className="mb-4">
                   <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Message</label>
                   <textarea
-                    id="message"
+                    id="body"
                     name="message"
                     value={formData.message}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     rows="4"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
@@ -159,9 +193,10 @@ const About = () => {
                 </div>
                 <button
                   type="submit"
+                  disabled={loading}
                   className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
                 >
-                  Send Message
+                  {loading ? "Loading..." : "Submit"}
                 </button>
               </form>
             </div>
