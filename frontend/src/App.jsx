@@ -12,6 +12,7 @@ import ChatApp from './Components/ChatUser.jsx';
 import Signup from './Components/Signup.jsx';
 import Login from './Components/Login.jsx';
 import PrivateRoute from './Components/PrivateRoute.jsx';
+import PGDetailsPage from './Components/Details.jsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -56,6 +57,10 @@ function App() {
     {
       path: "/chatting",
       element: <ChatApp/>
+    }, 
+    {
+      path: "/details/:id",
+      element: <PGDetailsPage/>
     }
   ]);
   
