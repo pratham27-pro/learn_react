@@ -21,7 +21,8 @@ export const signup = async (req, res, next) => {
         await newUser.save();
   
         // Remove the password field from the returned user data
-        const { password: _password, ...userData } = newUser._doc; // Renamed password to '_password'
+        const userData = { ...newUser._doc };
+        delete userData.password; // Renamed password to '_password'
   
         // Send back user data (without password)
         res.status(201).json(userData);
