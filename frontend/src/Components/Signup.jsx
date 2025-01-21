@@ -52,42 +52,48 @@ const Signup = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, username }),
       });
-    
+  
       if (!res.ok) {
         const errorMessage = await res.text();
-        alert(`Error: ${errorMessage}`);
+        setErrors({ api: errorMessage }); // Save the error message in the state
         setLoading(false);
         return;
       }
-
-      // Check if response body is empty
-      if (res.headers.get("content-length") === "0") {
+  
+      const userData = await res.text();
+      console.log("The user data is: ", userData); // Read the response as text
+  
+      if (!userData) {
         alert("No content returned from the API.");
         setLoading(false);
         return;
       }
-    
-      // Parse the response as JSON
-      const userData = await res.json(); // Will throw error if response is not valid JSON
-    
-      if (!userData || Object.keys(userData).length === 0) {
-        alert("No user data returned.");
+  
+      try {
+        const parsedUserData = JSON.parse(userData);
+  
+        if (!parsedUserData || Object.keys(parsedUserData).length === 0) {
+          alert("No user data returned.");
+          setLoading(false);
+          return;
+        }
+  
+        console.log("User Data:", parsedUserData);
+        dispatch(signinSuccess(parsedUserData)); // Dispatch Redux action
+        alert("Signup successful!");
+        navigate("/"); // Redirect after successful signup
+      } catch (error) {
         setLoading(false);
-        return;
+        alert("Failed to parse user data.");
+        console.error("Error parsing response:", error);
       }
-    
-      console.log("User Data:", userData);
-    
-      // Dispatch the user data for Redux or handle the state update
-      dispatch(signinSuccess(userData)); 
-      alert("Signup successful!");
-      navigate("/"); // Redirect after successful signup
     } catch (error) {
       setLoading(false);
       alert("An error occurred during signup. Please try again.");
       console.error("Signup error:", error);
     }
-};
+  };
+  
 
   
   const getPasswordStrength = (password) => {
