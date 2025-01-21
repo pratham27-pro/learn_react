@@ -54,7 +54,7 @@ const Signup = () => {
         body: JSON.stringify({ email, password, username }),
       });
   
-      // Check if the response is OK (status code 200-299)
+      // Check if the response status is OK (status code 200-299)
       if (!res.ok) {
         const errorMessage = await res.text();
         alert(`Error: ${errorMessage}`);
@@ -62,17 +62,24 @@ const Signup = () => {
         return;
       }
   
-      // Parse the response as JSON
-      const userData = await res.json(); 
-  
-      // Log and check if the response is as expected
-      console.log("User Data:", userData);
-  
-      if (!userData || Object.keys(userData).length === 0) {
-        alert("No data returned from the API.");
+      // Check if response body is not empty
+      if (res.headers.get("content-length") === "0") {
+        alert("No content returned from the API.");
         setLoading(false);
         return;
       }
+  
+      // Parse the response as JSON
+      const userData = await res.json(); 
+  
+      // Check if userData is valid
+      if (!userData || Object.keys(userData).length === 0) {
+        alert("No user data returned.");
+        setLoading(false);
+        return;
+      }
+  
+      console.log("User Data:", userData);
   
       // Dispatch the user data for Redux or handle the state update
       dispatch(signinSuccess(userData)); 
@@ -85,9 +92,6 @@ const Signup = () => {
     }
   };
   
-  
-  
-
   const getPasswordStrength = (password) => {
     if (password.length < 8) return "Weak";
     if (password.length < 12) return "Medium";

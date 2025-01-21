@@ -30,12 +30,12 @@ export const signup = async (req, res, next) => {
         const userData = { ...newUser._doc };
         delete userData.password; // Correct field name is `password`
   
-        // Send back user data (without password)
         console.log("Returning user data:", userData); // Log returned data
-        res.status(201).json(userData);
+        // Send back user data (without password)
+        return res.status(201).json(userData);
     } catch (error) {
         console.error("Signup error:", error);
-        next(errorHandler(500, "Error while doing user signup."));
+        return next(errorHandler(500, "Error while doing user signup."));
     }
 };
 

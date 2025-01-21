@@ -1,15 +1,18 @@
-// app.js
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import userRouter from "./routes/user.routes.js"; // Import user routes
 import authRouter from "./routes/auth.route.js";
 import contactRouter from "./routes/contact.route.js";
+import dotenv from "dotenv";
+
+dotenv.config(); // Load environment variables
 
 const app = express();
 
+// CORS Configuration (check if CORS_ORIGIN is defined)
 app.use(cors({
-    origin: ["http://localhost:5173", process.env.CORS_ORIGIN], // Allow requests from your frontend
+    origin: ["http://localhost:5173", process.env.CORS_ORIGIN].filter(Boolean), // filter out undefined values
     credentials: true,
 }));
 
@@ -23,15 +26,16 @@ app.use("/api/v1/users", userRouter); // Use the user routes
 app.use("/api/auth", authRouter);
 app.use("/api", contactRouter);
 
+// Global error handler (log the error to console for better debugging)
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
     const message = err.message || "Internal Server error";
-    return res.status(statusCode)
-               .json({
-                    success: false,
-                    message,
-                    statusCode,
-               })
-})
+    console.error("Error:", err); // Log error details to console
+    return res.status(statusCode).json({
+        success: false,
+        message,
+        statusCode,
+    });
+});
 
 export { app };
