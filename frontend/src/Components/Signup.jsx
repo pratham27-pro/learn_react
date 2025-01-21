@@ -64,8 +64,9 @@ const Signup = () => {
       }
   
       // Handle successful signup
+      dispatch(signinSuccess(userData));
       alert("Signup successful!");
-      navigate("/login"); // Redirect to the login page after successful signup
+      navigate("/"); 
     } catch (error) {
       setLoading(false);
       alert("An error occurred during signup. Please try again.");
