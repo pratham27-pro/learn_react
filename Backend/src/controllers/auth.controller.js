@@ -20,10 +20,10 @@ export const signup = async (req, res, next) => {
         const newUser = new AuthUser({ username, email, password: hashedPassword });
         await newUser.save();
   
-        // Remove password field from the user data to avoid sending it to the client
-        const { password: _, ...userData } = newUser._doc; // Rename password to '_'
+        // Remove the password field from the returned user data
+        const { password: _password, ...userData } = newUser._doc; // Renamed password to '_password'
   
-        // Send back user data (without password) upon successful signup
+        // Send back user data (without password)
         res.status(201).json(userData);
     } catch (error) {
         console.error("Signup error:", error);
@@ -31,8 +31,6 @@ export const signup = async (req, res, next) => {
     }
 };
 
-
-  
 
 export const signin = async (req, res, next) => {
     const { email, password } = req.body;
