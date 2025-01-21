@@ -12,7 +12,7 @@ const app = express();
 
 // CORS Configuration (check if CORS_ORIGIN is defined)
 app.use(cors({
-    origin: ["http://localhost:5173", process.env.CORS_ORIGIN].filter(Boolean), // filter out undefined values
+    origin: process.env.CORS_ORIGIN || "http://localhost:5173",// filter out undefined values
     credentials: true,
 }));
 
