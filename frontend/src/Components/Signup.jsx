@@ -36,7 +36,6 @@ const Signup = () => {
   
     const { email, password, username } = formData;
   
-    // Form validation
     const newErrors = {};
     if (!validateEmail(email)) newErrors.email = "Invalid email address.";
     if (!validatePassword(password)) newErrors.password = "Password must be at least 8 characters.";
@@ -53,34 +52,32 @@ const Signup = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, username }),
       });
-  
-      // Check if the response status is OK (status code 200-299)
+    
       if (!res.ok) {
         const errorMessage = await res.text();
         alert(`Error: ${errorMessage}`);
         setLoading(false);
         return;
       }
-  
-      // Check if response body is not empty
+
+      // Check if response body is empty
       if (res.headers.get("content-length") === "0") {
         alert("No content returned from the API.");
         setLoading(false);
         return;
       }
-  
+    
       // Parse the response as JSON
-      const userData = await res.json(); 
-  
-      // Check if userData is valid
+      const userData = await res.json(); // Will throw error if response is not valid JSON
+    
       if (!userData || Object.keys(userData).length === 0) {
         alert("No user data returned.");
         setLoading(false);
         return;
       }
-  
+    
       console.log("User Data:", userData);
-  
+    
       // Dispatch the user data for Redux or handle the state update
       dispatch(signinSuccess(userData)); 
       alert("Signup successful!");
@@ -90,7 +87,8 @@ const Signup = () => {
       alert("An error occurred during signup. Please try again.");
       console.error("Signup error:", error);
     }
-  };
+};
+
   
   const getPasswordStrength = (password) => {
     if (password.length < 8) return "Weak";

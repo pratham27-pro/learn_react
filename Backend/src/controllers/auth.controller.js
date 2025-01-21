@@ -4,7 +4,7 @@ import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 export const signup = async (req, res, next) => {
-    console.log("Received signup request with data:", req.body); // Log received data
+    console.log("Received signup request with data:", req.body); // Log the request data
     
     const { username, email, password } = req.body;
   
@@ -13,7 +13,7 @@ export const signup = async (req, res, next) => {
         const existingUser = await AuthUser.findOne({ email });
         if (existingUser) {
             console.log("Email already in use:", email); // Log if email already exists
-            return next(errorHandler(409, "Email already in use."));
+            return next(errorHandler(409, "Email already in use.")); // Ensure response is returned
         }
   
         // Hash password
@@ -32,12 +32,13 @@ export const signup = async (req, res, next) => {
   
         console.log("Returning user data:", userData); // Log returned data
         // Send back user data (without password)
-        return res.status(201).json(userData);
+        return res.status(201).json(userData); // Ensure you're returning a response here
     } catch (error) {
         console.error("Signup error:", error);
-        return next(errorHandler(500, "Error while doing user signup."));
+        return next(errorHandler(500, "Error while doing user signup.")); // Ensure response is returned
     }
 };
+
 
 
 export const signin = async (req, res, next) => {
