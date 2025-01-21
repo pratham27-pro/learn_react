@@ -12,6 +12,10 @@ function OAuth() {
 
   const handleGoogleClick = async () => {
     try {
+      if (!firebaseapp) {
+        throw new Error('Firebase app is not initialized');
+      }
+
       const provider = new GoogleAuthProvider();
       const auth = getAuth(firebaseapp);
 
@@ -30,18 +34,26 @@ function OAuth() {
         }),
       });
 
-      const data = await res.json();
-
-      if (res.ok) {
-        dispatch(signinSuccess(data)); // Dispatch the successful login action
-        navigate('/'); // Redirect to the home page
-      } else {
-        console.error('Google login failed:', data.message || 'Unknown error');
-        alert('Google login failed.');
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
+
+      const data = await res // Check if data is not null or undefined
+
+      if (!data) {
+        throw new Error('No data returned from the API');
+      }
+
+      dispatch(signinSuccess(data)); // Dispatch the successful login action
+      navigate('/'); // Redirect to the home page
     } catch (error) {
-      console.log('Could not login with Google', error);
-      alert('An error occurred during Google login.');
+      if (error instanceof SyntaxError) {
+        console.error('Failed to parse JSON response:', error);
+        alert('Failed to parse JSON response from the API');
+      } else {
+        console.error('Could not login with Google', error);
+        alert('An error occurred during Google login.');
+      }
     }
   };
 
