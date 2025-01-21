@@ -48,7 +48,7 @@ function Login() {
       if (!validatePassword(password)) {
         newErrors.password = 'Password must be at least 8 characters long';
       }
-
+    
       if (Object.keys(newErrors).length > 0) {
         // If validation fails, handle errors
         console.error("Validation failed:", newErrors);
@@ -70,7 +70,7 @@ function Login() {
             // Attempt to parse the error response as JSON
             const errorData = await res.json();
             console.error("Login failed:", errorData);
-        
+    
             // Dispatch failure with the error message
             dispatch(signinFailure(errorData.message || "Login failed"));
             
@@ -84,12 +84,14 @@ function Login() {
           }
           return;
         }
-        
     
         // Parse response JSON
         const data = await res.json();
         console.log("Login successful:", data);
-        dispatch(signinSuccess());
+    
+        // Dispatch signinSuccess with user data
+        dispatch(signinSuccess(data));
+    
         alert("Login successful!");
         navigate("/");
     
@@ -100,6 +102,7 @@ function Login() {
         alert("An error occurred during login. Please try again.");
       }
     };
+    
     
   
     const getPasswordStrength = (password) => {
