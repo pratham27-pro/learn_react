@@ -60,8 +60,10 @@ const Signup = () => {
       }
     
       const userData = await res.json();
-      if (userData && userData.user) { // Ensure the user object exists in the response
-        dispatch(signinSuccess(userData.user)); // Dispatch the user data for Redux
+      console.log(userData); // Check the actual structure of the response
+    
+      if (userData) { // Check if the response contains any data
+        dispatch(signinSuccess(userData)); // Dispatch the user data for Redux
         alert("Signup successful!");
         navigate("/"); // Redirect after successful signup
       } else {
