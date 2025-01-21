@@ -52,21 +52,16 @@ const Signup = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, username }),
       });
-  
-      setLoading(false);
-  
-      const isJson = res.headers.get("Content-Type")?.includes("application/json");
-      const data = isJson ? await res.json() : null;
-  
+    
       if (!res.ok) {
-        const errorMessage = data?.message || "Signup failed. Please try again.";
+        const errorMessage = await res.text();
         alert(errorMessage);
         return;
       }
-  
-      // Handle successful signup
-      if (data && data.user) { // Ensure the user object exists in the response
-        dispatch(signinSuccess(data.user)); // Dispatch the user data for Redux
+    
+      const userData = await res.json();
+      if (userData && userData.user) { // Ensure the user object exists in the response
+        dispatch(signinSuccess(userData.user)); // Dispatch the user data for Redux
         alert("Signup successful!");
         navigate("/"); // Redirect after successful signup
       } else {
