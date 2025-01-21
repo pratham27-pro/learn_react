@@ -32,9 +32,9 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true);
     setErrors({});
+  
     const { email, password, username } = formData;
-
-    // Validation
+  
     const newErrors = {};
     if (!validateEmail(email)) newErrors.email = "Invalid email address.";
     if (!validatePassword(password)) newErrors.password = "Password must be at least 8 characters.";
@@ -44,32 +44,35 @@ const Signup = () => {
       setLoading(false);
       return;
     }
-
+  
     try {
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, username }),
       });
-
+  
       setLoading(false);
+  
+      const isJson = res.headers.get("Content-Type")?.includes("application/json");
+      const data = isJson ? await res.json() : null;
+  
       if (!res.ok) {
-        const errorData = await res.json();
-        alert(`Signup failed: ${errorData.message || "Unknown error"}`);
+        const errorMessage = data?.message || "Signup failed. Please try again.";
+        alert(errorMessage);
         return;
       }
-      
-      const userData = await res.json(); // Assuming the response contains user data
-      dispatch(signinSuccess(userData));
-      // Success
+  
+      // Handle successful signup
       alert("Signup successful!");
-      navigate("/"); // Redirect to the homepage or dashboard
+      navigate("/login"); // Redirect to the login page after successful signup
     } catch (error) {
       setLoading(false);
       alert("An error occurred during signup. Please try again.");
       console.error("Signup error:", error);
     }
   };
+  
 
   const getPasswordStrength = (password) => {
     if (password.length < 8) return "Weak";
