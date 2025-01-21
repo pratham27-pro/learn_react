@@ -46,35 +46,6 @@ const Signup = () => {
       return;
     }
   
-    // try {
-    //   const res = await fetch("/api/auth/signup", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ email, password, username }),
-    //   });
-    
-    //   if (!res.ok) {
-    //     const errorMessage = await res.text();
-    //     alert(errorMessage);
-    //     return;
-    //   }
-    
-    //   const userData = await res.json();
-    //   console.log(userData); // Check the actual structure of the response
-    
-    //   if (userData) { // Check if the response contains any data
-    //     dispatch(signinSuccess(userData)); // Dispatch the user data for Redux
-    //     alert("Signup successful!");
-    //     navigate("/"); // Redirect after successful signup
-    //   } else {
-    //     alert("Signup failed. No user data returned.");
-    //   }
-    // } catch (error) {
-    //   setLoading(false);
-    //   alert("An error occurred during signup. Please try again.");
-    //   console.error("Signup error:", error);
-    // }
-
     try {
       const res = await fetch("/api/auth/signup", {
         method: "POST",
@@ -90,6 +61,11 @@ const Signup = () => {
     
       const userData = await res.text(); // Try to read the response as text
       console.log(userData); // Check the actual structure of the response
+    
+      if (userData.trim() === "") { // Check if the response is empty
+        alert("No data returned from the API.");
+        return;
+      }
     
       try {
         const parsedUserData = JSON.parse(userData); // Try to parse the response as JSON
