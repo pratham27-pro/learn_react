@@ -11,12 +11,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     sourcemap: true, // Ensure source maps are enabled for the deployment
-    proxy: {
-      "/api": 
-      {
-        target: "http://localhost:8000",
-        secure: false
-      }
-    }
+    target: process.env.NODE_ENV === 'production' 
+          ? 'https://eazypg-backend.onrender.com'  // Deployed backend URL on Render
+          : 'http://localhost:8000',  
   }
 })
