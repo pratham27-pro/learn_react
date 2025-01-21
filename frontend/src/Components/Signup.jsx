@@ -65,7 +65,7 @@ const Signup = () => {
       }
   
       // Handle successful signup
-      dispatch(signinSuccess(userData));
+      dispatch(signinSuccess(data));
       alert("Signup successful!");
       navigate("/"); 
     } catch (error) {
