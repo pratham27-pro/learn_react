@@ -36,6 +36,7 @@ const Signup = () => {
   
     const { email, password, username } = formData;
   
+    // Form validation
     const newErrors = {};
     if (!validateEmail(email)) newErrors.email = "Invalid email address.";
     if (!validatePassword(password)) newErrors.password = "Password must be at least 8 characters.";
@@ -52,43 +53,39 @@ const Signup = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, username }),
       });
-    
+  
+      // Check if the response is OK (status code 200-299)
       if (!res.ok) {
         const errorMessage = await res.text();
-        alert(errorMessage);
+        alert(`Error: ${errorMessage}`);
+        setLoading(false);
         return;
       }
-    
-      const userData = await res.text(); // Try to read the response as text
-      console.log(userData); // Check the actual structure of the response
-    
-      if (userData.trim() === "") { // Check if the response is empty
+  
+      // Parse the response as JSON
+      const userData = await res.json(); 
+  
+      // Log and check if the response is as expected
+      console.log("User Data:", userData);
+  
+      if (!userData || Object.keys(userData).length === 0) {
         alert("No data returned from the API.");
+        setLoading(false);
         return;
       }
-    
-      try {
-        const parsedUserData = JSON.parse(userData); // Try to parse the response as JSON
-        console.log(parsedUserData); // Check the parsed response
-    
-        if (parsedUserData) { // Check if the response contains any data
-          dispatch(signinSuccess(parsedUserData)); // Dispatch the user data for Redux
-          alert("Signup successful!");
-          navigate("/"); // Redirect after successful signup
-        } else {
-          alert("Signup failed. No user data returned.");
-        }
-      } catch (error) {
-        console.error("Error parsing response: ", error);
-        alert("Error parsing response from the API.");
-      }
+  
+      // Dispatch the user data for Redux or handle the state update
+      dispatch(signinSuccess(userData)); 
+      alert("Signup successful!");
+      navigate("/"); // Redirect after successful signup
     } catch (error) {
       setLoading(false);
       alert("An error occurred during signup. Please try again.");
       console.error("Signup error:", error);
     }
-
   };
+  
+  
   
 
   const getPasswordStrength = (password) => {

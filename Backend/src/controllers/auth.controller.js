@@ -4,14 +4,15 @@ import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
 export const signup = async (req, res, next) => {
-    console.log(req.body); // Check the req.body object
-
+    console.log("Received signup request with data:", req.body); // Log received data
+    
     const { username, email, password } = req.body;
   
     try {
         // Check for duplicate email
         const existingUser = await AuthUser.findOne({ email });
         if (existingUser) {
+            console.log("Email already in use:", email); // Log if email already exists
             return next(errorHandler(409, "Email already in use."));
         }
   
@@ -22,11 +23,15 @@ export const signup = async (req, res, next) => {
         const newUser = new AuthUser({ username, email, password: hashedPassword });
         await newUser.save();
   
+        // Log the new user created
+        console.log("New user created:", newUser);
+
         // Remove the password field from the returned user data
         const userData = { ...newUser._doc };
-        delete userData._password; // Update the delete statement to delete the correct field
+        delete userData.password; // Correct field name is `password`
   
         // Send back user data (without password)
+        console.log("Returning user data:", userData); // Log returned data
         res.status(201).json(userData);
     } catch (error) {
         console.error("Signup error:", error);
