@@ -19,6 +19,15 @@ app.use(cors({
 app.get('/', (req, res) => {
     res.status(200).json({ message: 'Backend is running!' });
 });
+app.get('/api/auth/signin', (req, res) => {
+    res.status(200).json({ message: 'Signin is running!' });
+});
+app.get('/api/auth/signup', (req, res) => {
+    res.status(200).json({ message: 'Signup is running!' });
+});
+app.get('/api/contact', (req, res) => {
+    res.status(200).json({ message: 'Contact is running!' });
+});
 
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
