@@ -65,9 +65,13 @@ const Signup = () => {
       }
   
       // Handle successful signup
-      dispatch(signinSuccess(data));
-      alert("Signup successful!");
-      navigate("/"); 
+      if (data && data.user) { // Ensure the user object exists in the response
+        dispatch(signinSuccess(data.user)); // Dispatch the user data for Redux
+        alert("Signup successful!");
+        navigate("/"); // Redirect after successful signup
+      } else {
+        alert("Signup failed. No user data returned.");
+      }
     } catch (error) {
       setLoading(false);
       alert("An error occurred during signup. Please try again.");
