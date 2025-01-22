@@ -30,38 +30,55 @@ const About = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     try {
       setLoading(true);
       setErrors(false);
-      const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL || ''}/api/contact`
-        , {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      
-      alert("Contact form successfully sent!")
-      navigate("/");
   
-      if (!res.ok) {
-        const errorData = await res.json();
-        console.error("Contact form failed:", errorData);
+      console.log("Submitting form data:", formData); // Debugging: Log form data before sending
+  
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL || ''}/api/contact`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+      console.log("API URL:", `${import.meta.env.VITE_API_BASE_URL || ''}/api/contact`);
+      console.log("Fetch response status:", response.status); // Debugging: Log response status
+      console.log("Fetch response headers:", response.headers);
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Contact form submission failed:", errorData);
         alert(`Contact form failed: ${errorData.message || "Unknown error"}`);
-        return;
+        return; // Exit early on error
       }
-
-      const data = await res.json();
-      console.log("Contact form successful:", data);
-      alert("Contact form successful!");
-
   
-    }catch (error) {
-      console.error("An error occurred during Contact form:", error);
+      const data = await response.json();
+      console.log("Contact form submission successful:", data);
+
+      try {
+        const errorData = await response.json();
+        console.error("Error details:", errorData);
+      } catch {
+        console.error("Failed to parse error response:", response);
+      }
+  
+      alert("Contact form successfully sent!");
+      navigate("/"); // Navigate to the desired page
+    } catch (error) {
+      console.error("An unexpected error occurred:", error);
       alert("An error occurred during Contact form. Please try again.");
-    }}
+    } finally {
+      setLoading(false); // Reset loading state
+    }
+  };
+  
+  
 
   const teamMembers = [
     {
