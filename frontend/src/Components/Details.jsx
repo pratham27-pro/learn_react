@@ -12,6 +12,7 @@ import {
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { MdSecurity, MdCleaningServices, MdPets } from "react-icons/md";
 import Nav from "./Nav.jsx";
+import { Link } from "react-router-dom";
 
 const PGDetailsPage = () => {
   const { id } = useParams(); // Get PG ID from the URL
@@ -267,12 +268,12 @@ const PGDetailsPage = () => {
 
             {/* Buttons */}
             <div className="mt-6 flex justify-between">
-              <button
-                className="bg-blue-600 text-white p-2 rounded-lg w-full mr-2"
-                onClick={() => alert("Viewing other candidates...")}
-              >
-                View Interested Candidates
-              </button>
+            <Link
+              to="/candidates"
+              className="bg-blue-600 text-white p-2 rounded-lg w-full mr-2 text-center block"
+            >
+              View Interested Candidates
+            </Link>
               <button
                 className="bg-green-600 text-white p-2 rounded-lg w-full ml-2"
                 onClick={() => alert("Contacting the owner...")}

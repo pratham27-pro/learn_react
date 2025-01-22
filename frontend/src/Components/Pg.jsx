@@ -88,7 +88,7 @@ const PGComponent = () => {
       setErrorMessage('No PGs found for the given location.');
     }
   };
-
+//
   return (
     <div className="bg-white pt-12">
       <header className="absolute inset-x-0 top-0 z-50">
