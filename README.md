@@ -1,5 +1,5 @@
 Here is the fully functional hosted site - 
 
-https://eazypg-frontend.onrender.com/
+https://eazypg.onrender.com/
 
 Enjoy <3
