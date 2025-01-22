@@ -14,13 +14,13 @@ const PGComponent = () => {
   const pgData = [
     {
       id: 1,
-      name: 'Sunshine PG',
-      location: '123 Main Street, Silicon Valley, CA',
-      rating: 4.8,
+      name: 'Ekta apartments',
+      location: 'Saket, South Delhi, Delhi',
+      rating: 4,
       reviews: 42,
       description:
         'A modern PG offering fully furnished rooms with essential amenities. Located near public transport and major landmarks.',
-      price: { monthlyRent: 8000, securityDeposit: 10000 },
+      price: { monthlyRent: 14000, securityDeposit: 10000 },
 
       image: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
