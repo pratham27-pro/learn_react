@@ -3,10 +3,12 @@
 import Nav from './Nav.jsx';
 import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.user);
   const fileRef = useRef(null);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
@@ -94,6 +96,7 @@ const Profile = () => {
         const result = await response.json();
         console.log('Form submitted successfully:', result);
         alert('Form submitted successfully!');
+        navigate('/');
         handleReset(); // Reset form after submission
       } catch (error) {
         console.error('Error submitting form:', error);
