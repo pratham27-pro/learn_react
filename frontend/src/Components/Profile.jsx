@@ -1,14 +1,12 @@
-'use client'
+'use client';
 
-import Nav from './Nav.jsx'
+import Nav from './Nav.jsx';
 import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const Profile = () => {
-  const {currentUser} = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
   const fileRef = useRef(null);
-  const [image, setImage] = useState(undefined);
-
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
@@ -17,7 +15,7 @@ const Profile = () => {
     motherTongue: '',
     foodPreference: '',
     wake: '',
-    description: ''
+    description: '',
   });
   const [profilePicture, setProfilePicture] = useState(null);
   const [errors, setErrors] = useState({});
@@ -43,12 +41,15 @@ const Profile = () => {
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.gender) newErrors.gender = 'Gender is required';
-    if (!formData.age || formData.age < 12 || formData.age > 100) newErrors.age = 'Age must be between 12 and 100';
-    if (!/^[6-9]\d{9}$/.test(formData.contactNumber.toString().trim())) {
+    if (!formData.age || formData.age < 12 || formData.age > 100) {
+      newErrors.age = 'Age must be between 12 and 100';
+    }
+    if (!/^[6-9]\d{9}$/.test(formData.contactNumber.trim())) {
       newErrors.contactNumber = 'Invalid Indian contact number';
-  }
-  
-    if (!formData.motherTongue.trim()) newErrors.motherTongue = 'Mother tongue is required';
+    }
+    if (!formData.motherTongue.trim()) {
+      newErrors.motherTongue = 'Mother tongue is required';
+    }
     if (!formData.foodPreference) newErrors.foodPreference = 'Food preference is required';
     if (!formData.wake) newErrors.wake = 'This field is required';
     return newErrors;
@@ -58,41 +59,52 @@ const Profile = () => {
     e.preventDefault();
     const newErrors = validateForm();
     if (Object.keys(newErrors).length === 0) {
-        setIsSubmitting(true);
+      setIsSubmitting(true);
 
-        // Prepare the form data to send
-        const formDataToSend = new FormData(); // Change this variable name
-        formDataToSend.append('name', formData.name); // Correctly use the state variable
-        formDataToSend.append('gender', formData.gender);
-        formDataToSend.append('age', formData.age);
-        formDataToSend.append('contactNumber', formData.contactNumber);
-        formDataToSend.append('motherTongue', formData.motherTongue);
-        formDataToSend.append('foodPreference', formData.foodPreference);
-        formDataToSend.append('wake', formData.wake);
-        formDataToSend.append('description', formData.description);
-        if (profilePicture) {
-            const blob = await fetch(profilePicture).then(r => r.blob());
-            formDataToSend.append('profilePicture', blob, 'profile.jpg'); // You can set any name
+      // Prepare the form data to send
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('gender', formData.gender);
+      formDataToSend.append('age', formData.age);
+      formDataToSend.append('contactNumber', formData.contactNumber);
+      formDataToSend.append('motherTongue', formData.motherTongue);
+      formDataToSend.append('foodPreference', formData.foodPreference);
+      formDataToSend.append('wake', formData.wake);
+      formDataToSend.append('description', formData.description);
+
+      if (profilePicture) {
+        const blob = await fetch(profilePicture).then((r) => r.blob());
+        formDataToSend.append('profilePicture', blob, 'profile.jpg');
+      }
+
+      // Send the form data to the backend
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/v1/users`, {
+          method: 'POST',
+          body: formDataToSend, // Don't set headers manually for FormData
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('Form submission failed:', errorData);
+          alert(`Form submission failed: ${errorData.message || 'Unknown error'}`);
+          return;
         }
 
-        // Send the form data to the backend
-        try {
-            const response = await fetch("https://eazypg.onrender.com/", 'http://localhost:8000/api/v1/users', {
-                method: 'POST',
-                body: formDataToSend,
-            });
-            const result = await response.json();
-            console.log('Form submitted:', result);
-            handleReset(); // Reset form after submission
-        } catch (error) {
-            console.error('Error submitting form:', error);
-        } finally {
-            setIsSubmitting(false);
-        }
+        const result = await response.json();
+        console.log('Form submitted successfully:', result);
+        alert('Form submitted successfully!');
+        handleReset(); // Reset form after submission
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('An error occurred while submitting the form. Please try again.');
+      } finally {
+        setIsSubmitting(false);
+      }
     } else {
-        setErrors(newErrors);
+      setErrors(newErrors);
     }
-};
+  };
 
   const handleReset = () => {
     setFormData({
@@ -103,7 +115,7 @@ const Profile = () => {
       motherTongue: '',
       foodPreference: '',
       wake: '',
-      description: ''
+      description: '',
     });
     setProfilePicture(null);
     setErrors({});
