@@ -36,7 +36,7 @@ const About = () => {
       setLoading(true);
       setErrors(false);
   
-      console.log("Submitting form data:", formData); // Debugging: Log form data before sending
+      //console.log("Submitting form data:", formData); // Debugging: Log form data before sending
   
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL || ''}/api/contact`,
@@ -48,23 +48,23 @@ const About = () => {
           body: JSON.stringify(formData),
         }
       );
-      console.log("API URL:", `${import.meta.env.VITE_API_BASE_URL || ''}/api/contact`);
-      console.log("Fetch response status:", response.status); // Debugging: Log response status
-      console.log("Fetch response headers:", response.headers);
+      // console.log("API URL:", `${import.meta.env.VITE_API_BASE_URL || ''}/api/contact`);
+      // console.log("Fetch response status:", response.status); // Debugging: Log response status
+      // console.log("Fetch response headers:", response.headers);
   
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("Contact form submission failed:", errorData);
+        // console.error("Contact form submission failed:", errorData);
         alert(`Contact form failed: ${errorData.message || "Unknown error"}`);
         return; // Exit early on error
       }
   
       const data = await response.json();
-      console.log("Contact form submission successful:", data);
+      // console.log("Contact form submission successful:", data);
 
       try {
         const errorData = await response.json();
-        console.error("Error details:", errorData);
+        // console.error("Error details:", errorData);
       } catch {
         console.error("Failed to parse error response:", response);
       }
@@ -72,7 +72,7 @@ const About = () => {
       alert("Contact form successfully sent!");
       navigate("/"); // Navigate to the desired page
     } catch (error) {
-      console.error("An unexpected error occurred:", error);
+      // console.error("An unexpected error occurred:", error);
       alert("An error occurred during Contact form. Please try again.");
     } finally {
       setLoading(false); // Reset loading state
