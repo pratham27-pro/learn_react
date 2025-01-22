@@ -20,6 +20,7 @@ const About = () => {
 
   const [errors, setErrors] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   // const handleInputChange = (e) => {
   //   const { name, value } = e.target;
